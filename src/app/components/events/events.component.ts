@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { data } from 'src/app/data/events';
 
 export class Event {
@@ -27,6 +28,10 @@ export class EventsComponent {
 
   seen = 0;
   notSeen = 0;
+  range = new FormGroup({
+    start: new FormControl(null, Validators.required),
+    end: new FormControl(null, Validators.required)
+  });
 
   // pagination vars
   page = 0;
@@ -45,7 +50,7 @@ export class EventsComponent {
 
   get data(): Event[] {
     const firstData = this.page * this.limit;
-    const dataWithFilter = this.events.filter((x) => this.filterData(x));
+    const dataWithFilter = this.events.filter((x) => this.filterData(x) && this.filterByDate(x));
     this.length = dataWithFilter.length;
     return dataWithFilter.slice(firstData, (firstData + this.limit));
   }
@@ -72,6 +77,14 @@ export class EventsComponent {
       if (!found) { return true; }
     });
     return found;
+  }
+
+  filterByDate(value: Event): boolean {
+    if (this.range.valid) {
+      const date = new Date(value.timestamp);
+      return date >= new Date(this.range.value.start) && date <= new Date(this.range.value.end);
+    }
+    return true;
   }
 
   updateStatistics(): void {

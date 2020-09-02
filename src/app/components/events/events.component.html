@@ -18,7 +18,7 @@
                 </mat-card>
             </div>
         </div>
-        <div class="col-12 d-flex px-0">
+        <div class="row col-12 mx-0 px-0">
             <mat-form-field class="col-12 col-md-6 mx-auto">
                 <mat-label>Buscar</mat-label>
                 <input
@@ -27,6 +27,16 @@
                     placeholder="Busqueda de evento"
                     [(ngModel)]="filter"
                     autocomplete="off">
+            </mat-form-field>
+            <div class="col-12"></div>
+            <mat-form-field class="col-12 col-md-6 mx-auto" appearance="fill" >
+                <mat-label>Ingresar un rango de fecha</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+                  <input matStartDate placeholder="Start date" formControlName="start">
+                  <input matEndDate placeholder="End date" formControlName="end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
         </div>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of data">
