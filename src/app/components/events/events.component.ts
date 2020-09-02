@@ -23,20 +23,43 @@ export class Event {
 export class EventsComponent {
 
   events: Event[] = data.events;
+  filter = '';
 
   // pagination vars
   page = 0;
   limit = 10;
+  length = this.events.length;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
   get data(): Event[] {
     const firstData = this.page * this.limit;
-    return this.events.slice(firstData, (firstData + this.limit));
+    const dataWithFilter = this.events.filter((x) => this.filterData(x));
+    this.length = dataWithFilter.length;
+    return dataWithFilter.slice(firstData, (firstData + this.limit));
   }
 
   paginate(pageEvent: PageEvent): void {
     this.page = pageEvent.pageIndex;
     this.limit = pageEvent.pageSize;
+  }
+
+  filterData(value: Event): boolean {
+    const keys = this.filter.trim().toLowerCase().split(' ');
+    if (!keys.length) { return true; }
+    let found;
+    keys.some(key => {
+      found = false;
+      if (
+        value.labels.join(' ').toLowerCase().indexOf(key) !== -1 ||
+        value.eventBody.symbol.toLowerCase().indexOf(key) !== -1 ||
+        (value.eventBody.codigoOperacion && value.eventBody.codigoOperacion.toLowerCase().indexOf(key) !== -1) ||
+        value.timestamp.toLowerCase().indexOf(key) !== -1 ||
+        value.status.toLowerCase().indexOf(key) !== -1 ||
+        value.checked.toLowerCase().indexOf(key) !== -1
+      ) { found = true; }
+      if (!found) { return true; }
+    });
+    return found;
   }
 
 }

@@ -1,5 +1,16 @@
 <div class="min-vh-100 bg-light">
-    <div class="container row mx-auto">
+    <div class="container row mx-auto mt-4">
+        <div class="col-12 d-flex px-0">
+            <mat-form-field class="col-12 col-md-6 mx-auto">
+                <mat-label>Buscar</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Busqueda de evento"
+                    [(ngModel)]="filter"
+                    autocomplete="off">
+            </mat-form-field>
+        </div>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of data">
             <mat-card class="flex-fill m-2">
                 <mat-card-header>
@@ -33,7 +44,7 @@
         </div>
         <mat-paginator
             class="col-12"
-            [length]="events.length"
+            [length]="length"
             [pageSize]="limit"
             [pageSizeOptions]="pageSizeOptions"
             (page)="paginate($event)">
