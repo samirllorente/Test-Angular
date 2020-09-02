@@ -1,6 +1,6 @@
 <div class="min-vh-100 bg-light">
     <div class="container row mx-auto">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of events">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of data">
             <mat-card class="flex-fill m-2">
                 <mat-card-header>
                     <mat-card-title class="d-flex align-items-center text-dark fz-0_85">
@@ -31,5 +31,12 @@
                 </mat-card-actions>
             </mat-card>
         </div>
+        <mat-paginator
+            class="col-12"
+            [length]="events.length"
+            [pageSize]="limit"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="paginate($event)">
+        </mat-paginator>
     </div>
 </div>

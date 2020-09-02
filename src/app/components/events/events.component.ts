@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { data } from 'src/app/data/events';
 
 export class Event {
@@ -19,12 +20,23 @@ export class Event {
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent {
 
   events: Event[] = data.events;
-  constructor() { }
 
-  ngOnInit(): void {
+  // pagination vars
+  page = 0;
+  limit = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  get data(): Event[] {
+    const firstData = this.page * this.limit;
+    return this.events.slice(firstData, (firstData + this.limit));
+  }
+
+  paginate(pageEvent: PageEvent): void {
+    this.page = pageEvent.pageIndex;
+    this.limit = pageEvent.pageSize;
   }
 
 }

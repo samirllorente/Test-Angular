@@ -6,6 +6,7 @@ import { EventsComponent } from './events.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [EventsComponent],
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     EventsRoutingModule,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule
   ]
 })
 export class EventsModule { }
