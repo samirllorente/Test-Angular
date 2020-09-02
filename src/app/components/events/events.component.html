@@ -54,7 +54,12 @@
                     <label class="mb-0"><b>Etiquetas:</b> {{ event.labels.join(', ') | titlecase }}</label>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary" class="w-100" [disabled]="event.checked === 'visto'">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        class="w-100"
+                        [disabled]="event.checked === 'visto'"
+                        (click)="updatechecked(event.id)">
                         <mat-icon class="mr-1">done</mat-icon>Visto
                     </button>
                 </mat-card-actions>

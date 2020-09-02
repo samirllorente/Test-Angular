@@ -35,6 +35,11 @@ export class EventsComponent {
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
   constructor() {
+    if (localStorage.getItem('events')) {
+      this.events = JSON.parse(localStorage.getItem('events'));
+    } else {
+      localStorage.setItem('events', JSON.stringify(this.events));
+    }
     this.updateStatistics();
   }
 
@@ -74,4 +79,9 @@ export class EventsComponent {
     this.notSeen = this.events.length - this.seen;
   }
 
+  updatechecked(id): void {
+    this.events.find(x => x.id === id).checked = 'visto';
+    localStorage.setItem('events', JSON.stringify(this.events));
+    this.updateStatistics();
+  }
 }
