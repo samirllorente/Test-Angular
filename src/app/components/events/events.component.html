@@ -1,0 +1,35 @@
+<div class="min-vh-100 bg-light">
+    <div class="container row mx-auto">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of events">
+            <mat-card class="flex-fill m-2">
+                <mat-card-header>
+                    <mat-card-title class="d-flex align-items-center text-dark fz-0_85">
+                        <mat-icon [ngClass]="{
+                                'text-danger' : event.criticality === 'alta',
+                                'text-dark': event.criticality === 'baja'
+                            }" [title]="event.criticality">
+                            circle
+                        </mat-icon> 
+                        {{ event.eventBody.symbol | uppercase }}
+                        <span *ngIf="event.eventBody.codigoOperacion">
+                            ({{ event.eventBody.codigoOperacion }})
+                        </span>
+                    </mat-card-title>
+                    <mat-card-subtitle class="fz-0_65">
+                        {{ event.timestamp | uppercase }}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <label class="mb-0"><b>Estado:</b> {{ event.status | titlecase }}</label><br>
+                    <label class="mb-0"><b>¿Chequeado?:</b> {{ event.checked | titlecase}}</label><br>
+                    <label class="mb-0"><b>Etiquetas:</b> {{ event.labels.join(', ') | titlecase }}</label>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="w-100" [disabled]="event.checked === 'visto'">
+                        <mat-icon class="mr-1">done</mat-icon>Visto
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

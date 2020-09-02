@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EventsComponent } from './events.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./components/events/events.module').then(Mod => Mod.EventsModule)
+    component: EventsComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class EventsRoutingModule { }
