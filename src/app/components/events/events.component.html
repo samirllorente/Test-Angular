@@ -1,5 +1,23 @@
 <div class="min-vh-100 bg-light">
-    <div class="container row mx-auto mt-4">
+    <div class="container row mx-auto pt-4">
+        <div class="row col-12 mx-0 px-0">
+            <div class="col-12 col-md-6 col-lg-3">
+                <mat-card class="statistics m-1">
+                    <mat-card-content>
+                        <b>Eventos vistos: </b>
+                        {{ seen | number }}
+                    </mat-card-content> 
+                </mat-card>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <mat-card class="statistics m-1">
+                    <mat-card-content>
+                        <b>Eventos no vistos: </b>
+                        {{ notSeen | number }}
+                    </mat-card-content> 
+                </mat-card>
+            </div>
+        </div>
         <div class="col-12 d-flex px-0">
             <mat-form-field class="col-12 col-md-6 mx-auto">
                 <mat-label>Buscar</mat-label>

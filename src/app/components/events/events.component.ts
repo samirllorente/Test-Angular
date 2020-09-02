@@ -25,11 +25,18 @@ export class EventsComponent {
   events: Event[] = data.events;
   filter = '';
 
+  seen = 0;
+  notSeen = 0;
+
   // pagination vars
   page = 0;
   limit = 10;
   length = this.events.length;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  constructor() {
+    this.updateStatistics();
+  }
 
   get data(): Event[] {
     const firstData = this.page * this.limit;
@@ -60,6 +67,11 @@ export class EventsComponent {
       if (!found) { return true; }
     });
     return found;
+  }
+
+  updateStatistics(): void {
+    this.seen = this.events.filter(x => x.checked === 'visto').length;
+    this.notSeen = this.events.length - this.seen;
   }
 
 }
