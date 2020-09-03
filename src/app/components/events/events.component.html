@@ -29,15 +29,18 @@
                     autocomplete="off">
             </mat-form-field>
             <div class="col-12"></div>
-            <mat-form-field class="col-12 col-md-6 mx-auto" appearance="fill" >
-                <mat-label>Ingresar un rango de fecha</mat-label>
-                <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
-                  <input matStartDate placeholder="Start date" formControlName="start">
-                  <input matEndDate placeholder="End date" formControlName="end">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
+            <form class="row col-12 col-md-6 mx-auto" [formGroup]="range">
+                <mat-form-field class="col-12 col-md-6 px-0 pr-md-3 pl-md-0">
+                    <input matInput [ngxMatDatetimePicker]="pickerStart" placeholder="Desde" formControlName="start">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #pickerStart></ngx-mat-datetime-picker>
+                </mat-form-field>
+                <mat-form-field class="col-12 col-md-6 px-0 pl-md-3 pr-md-0">
+                    <input matInput [ngxMatDatetimePicker]="pickerEnd" placeholder="Hasta" formControlName="end">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #pickerEnd></ngx-mat-datetime-picker>
+                </mat-form-field>
+            </form>
         </div>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex px-0" *ngFor="let event of data">
             <mat-card class="flex-fill m-2">

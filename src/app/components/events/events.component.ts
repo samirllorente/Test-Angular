@@ -80,11 +80,14 @@ export class EventsComponent {
   }
 
   filterByDate(value: Event): boolean {
-    if (this.range.valid) {
-      const date = new Date(value.timestamp);
-      return date >= new Date(this.range.value.start) && date <= new Date(this.range.value.end);
+    if (this.range.controls.start.invalid && this.range.controls.end.invalid) { return true; }
+    let valid = true;
+    const date = new Date(value.timestamp);
+    if (this.range.controls.start.valid && date <= new Date(this.range.value.start) ||
+      this.range.controls.end.valid && date >= new Date(this.range.value.end)) {
+      valid = false;
     }
-    return true;
+    return valid;
   }
 
   updateStatistics(): void {
